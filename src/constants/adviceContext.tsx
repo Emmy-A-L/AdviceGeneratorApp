@@ -5,11 +5,12 @@ import {
   getCachedAdvice,
   saveFavourite,
 } from "../storage/CacheService";
+import { AdviceCardProps } from "../components/advice-card";
 
 export const AdviceContext = createContext<any>(null);
 
 export const AdviceProvider = ({ children }: any) => {
-  const [advice, setAdvice] = useState("Loading...");
+  const [advice, setAdvice] = useState<AdviceCardProps>({ id: 0, text: "Loading..." });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export const AdviceProvider = ({ children }: any) => {
       const cached = await getCachedAdvice();
 
       if (cached) setAdvice(cached);
-      else setAdvice("Offline and no cached data.");
+      else setAdvice({ id: 0, text: "Offline and no cached data." });
     } finally {
       setLoading(false);
     }

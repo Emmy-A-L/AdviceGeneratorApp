@@ -2,9 +2,15 @@
 import { View, Text, StyleSheet } from "react-native";
 import colors from "../theme/colors";
 
-export default function AdviceCard({ text }: { text: string }) {
+export type AdviceCardProps = {
+  id: number;
+  text: string;
+};
+
+export default function AdviceCard({ id, text }: AdviceCardProps) {
   return (
     <View style={styles.card}>
+      <Text style={styles.text}>ADVICE #{id}</Text>
       <Text style={styles.text}>{text}</Text>
     </View>
   );

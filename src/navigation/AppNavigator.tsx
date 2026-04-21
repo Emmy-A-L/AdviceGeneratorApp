@@ -25,6 +25,12 @@ export default function AppNavigator() {
           },
           tabBarActiveTintColor: "#00A86B",
           tabBarInactiveTintColor: "gray",
+          tabBarStyle: {
+            backgroundColor: "#272727",
+            borderColor: "#00A86B",
+            // borderWidth: 1,
+            // borderRadius: 16,
+          },
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />

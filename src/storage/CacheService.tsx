@@ -13,17 +13,28 @@ export const getCachedAdvice = async () => {
   return data ? JSON.parse(data) : null;
 };
 
+// Save full advice object (id + text), avoid duplicates by id
 export const saveFavourite = async (advice: AdviceCardProps) => {
   const existing = await AsyncStorage.getItem(FAV_KEY);
-  const list = existing ? JSON.parse(existing) : [];
+  const list: AdviceCardProps[] = existing ? JSON.parse(existing) : [];
 
-  if (!list.includes(advice.id)) {
-    list.push(advice.id);
+  const alreadySaved = list.some((item) => item.id === advice.id);
+  if (!alreadySaved) {
+    list.unshift(advice); // newest at the top
     await AsyncStorage.setItem(FAV_KEY, JSON.stringify(list));
   }
 };
 
-export const getFavourites = async () => {
+// Returns full advice objects
+export const getFavourites = async (): Promise<AdviceCardProps[]> => {
   const data = await AsyncStorage.getItem(FAV_KEY);
   return data ? JSON.parse(data) : [];
+};
+
+// Remove a single advice by id
+export const removeFavourite = async (id: number) => {
+  const existing = await AsyncStorage.getItem(FAV_KEY);
+  const list: AdviceCardProps[] = existing ? JSON.parse(existing) : [];
+  const updated = list.filter((item) => item.id !== id);
+  await AsyncStorage.setItem(FAV_KEY, JSON.stringify(updated));
 };

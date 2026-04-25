@@ -23,13 +23,26 @@ export default function AppNavigator() {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
+          headerShown: false,
           tabBarActiveTintColor: "#00A86B",
           tabBarInactiveTintColor: "gray",
+          tabBarAllowFontScaling: true,
           tabBarStyle: {
+            position: "absolute",
+            bottom: 20,
+            left: 10,
+            right: 10,
             backgroundColor: "#272727",
             borderColor: "#00A86B",
-            // borderWidth: 1,
-            // borderRadius: 16,
+            borderWidth: .1,
+            borderRadius: 16,
+            width: "90%",
+            marginHorizontal: "auto",
+            opacity: 0.9,
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            msBackdropFilter: "blur(10px)",
+            height: "auto",
           },
         })}
       >

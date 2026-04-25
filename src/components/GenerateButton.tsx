@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import {
-  TouchableOpacity,
-  Text,
-  ActivityIndicator,
+  Pressable,
   StyleSheet,
   Animated,
   Easing
@@ -35,32 +33,38 @@ export default function GenerateButton({ onPress, loading }: { onPress: () => vo
   });
 
   return (
-    <TouchableOpacity
-      style={styles.button}
+    <Pressable
+      style={({ pressed }) => [
+        styles.button,
+        pressed && styles.buttonPressed
+      ]}
       onPress={onPress}
       disabled={loading}
     >
       <Animated.View style={{ transform: [{ rotate: spin }] }}>
-        <Ionicons name="dice" size={28} color="black" />
+        <Ionicons name="dice" size={32} color={colors.background} />
       </Animated.View>
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.primary,
-    padding: 14,
-    borderRadius: 30,
-    marginTop: 20,
-    marginBottom: 20,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
     alignItems: "center",
     justifyContent: "center",
-    marginHorizontal: "auto",
-    width: 60,
+    marginTop: -32, // Overlaps perfectly
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 20,
+    elevation: 0,
   },
-  text: {
-    color: "#000",
-    fontWeight: "bold",
+  buttonPressed: {
+    shadowOpacity: 0.8,
+    elevation: 20, // Android shadow
   },
 });

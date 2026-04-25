@@ -1,12 +1,12 @@
+import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useRef } from "react";
 import {
-  Pressable,
-  StyleSheet,
   Animated,
-  Easing
+  Easing,
+  Pressable,
+  StyleSheet
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import colors from "../theme/colors";
+import colors from "../main/theme/colors";
 
 export default function GenerateButton({ onPress, loading }: { onPress: () => void, loading: boolean }) {
   const spinValue = useRef(new Animated.Value(0)).current;

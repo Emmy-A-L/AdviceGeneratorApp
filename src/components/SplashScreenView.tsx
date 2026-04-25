@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
   Animated,
   Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
-import colors from "../theme/colors";
+import colors from "../main/theme/colors";
 
 const { width } = Dimensions.get("window");
 
@@ -52,7 +52,7 @@ export default function SplashScreenView() {
         ]}
       >
         <Image
-          source={require("../assets/images/advice-logo-transparent.png")}
+          source={require("../assets/images/main-icon.png")}
           style={styles.logo}
           resizeMode="contain"
         />

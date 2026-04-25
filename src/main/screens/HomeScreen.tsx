@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
-import AdviceCard from "../components/advice-card";
-import GenerateButton from "../components/GenerateButton";
+import AdviceCard from "../../components/advice-card";
+import GenerateButton from "../../components/GenerateButton";
+import { AppBannerAd, initializeAds } from "../../components/AdsManager";
 import { AdviceContext } from "../constants/adviceContext";
 import colors from "../theme/colors";
 import { Text } from "react-native";
@@ -11,6 +12,7 @@ export default function HomeScreen({ navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <AppBannerAd />
       <View style={styles.content}>
         <Text style={styles.text}>ADVICE GENERATOR</Text>
         <AdviceCard
@@ -20,6 +22,7 @@ export default function HomeScreen({ navigation }: any) {
         />
         <GenerateButton onPress={generateAdvice} loading={loading} />
       </View>
+      <AppBannerAd />
     </SafeAreaView>
   );
 }

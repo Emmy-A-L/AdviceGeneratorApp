@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,11 +8,16 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
+import { AppBannerAd, initializeAds } from "../../components/AdsManager";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { getFavourites, removeFavourite } from "../storage/CacheService";
-import { AdviceCardProps } from "../components/advice-card";
-import colors from "../theme/colors";
+import { getFavourites, removeFavourite } from "../../storage/CacheService";
+import { AdviceCardProps } from "../../components/advice-card";
+import colors from "../theme/colors"; 
+
+useEffect(()=>{
+  initializeAds();
+}, [])
 
 // ─── Individual favourite row ─────────────────────────────────────────────────
 function FavouriteItem({
@@ -34,6 +39,7 @@ function FavouriteItem({
 
   return (
     <Animated.View style={[styles.itemCard, { opacity: fadeAnim }]}>
+      <AppBannerAd />
       <View style={styles.itemHeader}>
         <Text style={styles.itemLabel}>ADVICE #{item.id}</Text>
         <TouchableOpacity
@@ -46,6 +52,7 @@ function FavouriteItem({
         </TouchableOpacity>
       </View>
       <Text style={styles.itemText}>"{item.text}"</Text>
+      <AppBannerAd />
     </Animated.View>
   );
 }
@@ -56,6 +63,7 @@ function EmptyState() {
 
   return (
     <View style={styles.emptyWrapper}>
+      <AppBannerAd />
       <View style={styles.emptyIconCircle}>
         <Ionicons name="heart" size={32} color={colors.textSecondary} />
       </View>
@@ -70,6 +78,7 @@ function EmptyState() {
       >
         <Text style={styles.discoverBtnText}>Discover Advice</Text>
       </TouchableOpacity>
+      <AppBannerAd />
     </View>
   );
 }
@@ -228,6 +237,7 @@ const styles = StyleSheet.create({
     letterSpacing: 3,
     textTransform: "uppercase",
     fontFamily: "Manrope",
+    fontWeight: "200",
   },
   deleteBtn: {
     padding: 4,

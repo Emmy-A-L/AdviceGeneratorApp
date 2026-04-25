@@ -1,11 +1,11 @@
-import React, { createContext, useState, useEffect } from "react";
-import { fetchAdvice } from "../api/AdviceApi";
+import React, { createContext, useEffect, useState } from "react";
+import { AdviceCardProps } from "../../components/advice-card";
+import { fetchAdvice } from "../../api/AdviceApi";
 import {
   cacheAdvice,
   getCachedAdvice,
   saveFavourite,
-} from "../storage/CacheService";
-import { AdviceCardProps } from "../components/advice-card";
+} from "../../storage/CacheService";
 
 export const AdviceContext = createContext<any>(null);
 

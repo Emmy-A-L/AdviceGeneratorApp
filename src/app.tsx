@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useFonts, Manrope_800ExtraBold } from "@expo-google-fonts/manrope";
+import { Manrope_800ExtraBold, useFonts } from "@expo-google-fonts/manrope";
 import * as SplashScreen from "expo-splash-screen";
-import { AdviceProvider } from "./constants/adviceContext";
-import AppNavigator from "./navigation/AppNavigator";
+import React, { useEffect, useState } from "react";
 import SplashScreenView from "./components/SplashScreenView";
+import { AppBannerAd, initializeAds } from "./components/AdsManager";
+import { AdviceProvider } from "./main/constants/adviceContext";
+import AppNavigator from "./main/navigation/AppNavigator";
 
 // Minimum time (ms) the custom splash is guaranteed to be visible
 const MIN_SPLASH_MS = 5000;
@@ -26,6 +27,11 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // initialize mobile ads
+  useEffect(() => {
+    initializeAds();
+  }, []);
+
   // Show custom splash until fonts AND minimum time are both ready
   if (!fontsLoaded || !minTimeElapsed) {
     return <SplashScreenView />;
@@ -33,6 +39,7 @@ export default function App() {
 
   return (
     <AdviceProvider>
+      <AppBannerAd />
       <AppNavigator />
     </AdviceProvider>
   );
